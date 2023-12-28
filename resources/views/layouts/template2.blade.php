@@ -28,21 +28,50 @@ License: For each use you must have a valid license purchased only from above li
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
+		{{-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
+		
+
+		
+		<link rel="stylesheet" href="\metronic_assets\datatable\datatables.bundle.css">
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		<link href="metronic_assets/plugins.bundle.js" rel="stylesheet" type="text/css" />
-		<link href="metronic_assets/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="metronic_assets/style.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="\metronic_assets\plugins.bundle.js" rel="stylesheet" type="text/css" />
+		<link href="\metronic_assets\plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="\metronic_assets\style.bundle.css" rel="stylesheet" type="text/css" />
+		
+		{{-- <link href="metronic_assets\jquery.dataTables.min.css" rel="stylesheet"> --}}
+		<style>
+			.text-portal{
+				color: #0b6e4f !important;
+			}
+
+			.bg-portal{
+				background-color: #0b6e4f !important;
+				color: #fff !important;
+			}
+
+			#kt_footer {
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				height: 50px;   /* Height of the footer */
+			}
+		</style>
+
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-		<link rel="icon" href="images\adihusada-logo.png" type="image/icon type">
+		<link rel="icon" href="\images\adihusada-logo.png" type="image/icon type">
+		{{-- <script src="resources\js\ziggy.js"></script> --}}
 		@section('css_scripts')
-		@show
+		
+		
 		<!--end::Global Stylesheets Bundle-->
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
-		<!--begin::Main-->
+		
+	<!--begin::Main-->
 	<div>
+			@routes
 			<!--begin::Root-->
 			<div class="d-flex flex-column flex-root">
 				<!--begin::Page-->
@@ -52,8 +81,8 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Brand-->
 						<div class="aside-logo flex-column-auto" id="kt_aside_logo">
 							<!--begin::Logo-->
-							<a href="#">
-								<img alt="Logo" src="images\adihusada-logotext.png" class="h-25px logo" />
+							<a href="{{ route('dashboard') }}">
+								<img alt="Logo" src="\images\adihusada-logotext.png" class="h-25px logo" />
 							</a>
 							<!--end::Logo-->
 							<!--begin::Aside toggler-->
@@ -75,25 +104,29 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Aside Menu-->
 							<div class="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="0">
 								<!--begin::Menu-->
+								{{-- @dd(url()->current() == route('dashboard')) --}}
 								<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
-									<div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-										<span class="menu-link">
-											<span class="menu-icon">
-												<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-												<span class="svg-icon svg-icon-2">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-														<rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-														<rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-														<rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-														<rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-													</svg>
+									<div class="menu-item {{ url()->current() == route('dashboard') ? 'here show' : '' }} menu-accordion">
+											<span class="menu-link">
+												<span class="menu-icon">
+													
+													<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+													<span class="svg-icon svg-icon-2">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+															<rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+															<rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+															<rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+															<rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+														</svg>
+													</span>
+													<!--end::Svg Icon-->
+													</a>
 												</span>
-												<!--end::Svg Icon-->
+												<a href="{{ route('dashboard') }}" class="menu-title">Dashboard</a>
+												{{-- <span class="menu-arrow"></span> --}}
 											</span>
-											<span class="menu-title">Dashboard</span>
-											{{-- <span class="menu-arrow"></span> --}}
-										</span>
-										<div class="menu-sub menu-sub-accordion menu-active-bg show">
+										
+										<div class="menu-sub menu-sub-accordion menu-active-bg">
 											{{-- <div class="menu-item">
 												<a class="menu-link active" href="../../demo1/dist/index.html">
 													<span class="menu-bullet">
@@ -210,7 +243,7 @@ License: For each use you must have a valid license purchased only from above li
 									</div>
 									<div class="menu-item">
 										<div class="menu-content pt-8 pb-2">
-											<span class="menu-section text-muted text-uppercase fs-8 ls-1">Barang</span>
+											<span class="menu-section text-muted text-uppercase fs-8 ls-1">MENU</span>
 										</div>
 									</div>
 									<div data-kt-menu-trigger="click" class="menu-item menu-accordion hover show">
@@ -230,211 +263,37 @@ License: For each use you must have a valid license purchased only from above li
 											<span class="menu-arrow"></span>
 										</span>
 										<div class="menu-sub menu-sub-accordion menu-active-bg show">
-											{{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-												<span class="menu-link">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">User Profile</span>
-													<span class="menu-arrow"></span>
-												</span>
-												<div class="menu-sub menu-sub-accordion menu-active-bg">
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/user-profile/overview.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Overview</span>
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/user-profile/projects.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Projects</span>
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/user-profile/campaigns.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Campaigns</span>
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/user-profile/documents.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Documents</span>
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/user-profile/followers.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Followers</span>
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/user-profile/activity.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Activity</span>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-												<span class="menu-link">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">Blog</span>
-													<span class="menu-arrow"></span>
-												</span>
-												<div class="menu-sub menu-sub-accordion menu-active-bg">
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/blog/home.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Blog Home</span>
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/blog/post.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Blog Post</span>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-												<span class="menu-link">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">Pricing</span>
-													<span class="menu-arrow"></span>
-												</span>
-												<div class="menu-sub menu-sub-accordion menu-active-bg">
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/pricing/pricing-1.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Pricing 1</span>
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/pricing/pricing-2.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Pricing 2</span>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-												<span class="menu-link">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">Careers</span>
-													<span class="menu-arrow"></span>
-												</span>
-												<div class="menu-sub menu-sub-accordion menu-active-bg">
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/careers/list.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Careers List</span>
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/careers/apply.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Careers Apply</span>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-												<span class="menu-link">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">FAQ</span>
-													<span class="menu-arrow"></span>
-												</span>
-												<div class="menu-sub menu-sub-accordion menu-active-bg">
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/faq/classic.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Classic</span>
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link" href="../../demo1/dist/pages/faq/extended.html">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Extended</span>
-														</a>
-													</div>
-												</div>
-											</div> --}}
 											<div class="menu-item">
-												<a class="menu-link" href="#">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">Kategori Barang</span>
-												</a>
-											</div>
-											<div class="menu-item">
-												<a class="menu-link" href="#">
+												<a class="menu-link {{ Request::is('items*') ? 'active' : '' }}" href="{{ route('item') }}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
 													<span class="menu-title">Barang</span>
 												</a>
 											</div>
+											<div class="menu-item">
+												<a class="menu-link {{ Request::is('computers*') ? 'active' : '' }}" href="">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">Komputer</span>
+												</a>
+											</div>
+											{{-- @dd(Request::is('services*')) --}}
+											<div class="menu-item">
+												<a class="menu-link {{ Request::is('services*') ? 'active' : '' }}" href="{{ route('service') }}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">Service</span>
+												</a>
+											</div>
 											{{-- <div class="menu-item">
-												<a class="menu-link" href="../../demo1/dist/pages/team.html">
+												<a class="menu-link {{ url()->current() == route('services') ? 'active' : '' }}" href="{{ route('service.detail', 4) }}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
-													<span class="menu-title">Our Team</span>
-												</a>
-											</div>
-											<div class="menu-item">
-												<a class="menu-link" href="../../demo1/dist/pages/licenses.html">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">Licenses</span>
-												</a>
-											</div>
-											<div class="menu-item">
-												<a class="menu-link" href="../../demo1/dist/pages/sitemap.html">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">Sitemap</span>
+													<span class="menu-title">Tes</span>
 												</a>
 											</div> --}}
 										</div>
@@ -505,7 +364,7 @@ License: For each use you must have a valid license purchased only from above li
 										<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 											<!--begin::Menu wrapper-->
 											<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-												<img src="images\ava-dummy.jpg" alt="user" />
+												<img src="\images\ava-dummy.jpg" alt="user" />
 											</div>
 											<!--begin::User account menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -520,8 +379,8 @@ License: For each use you must have a valid license purchased only from above li
 														<!--begin::Username-->
 														<div class="d-flex flex-column">
 															<div class="fw-bolder d-flex align-items-center fs-5">{{ auth()->user()->username }}
-															<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
-															<a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ auth()->user()->username . "@example.com" }}</a>
+															<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"></span></div>
+															<a href="#" class="fw-bold text-muted text-hover-primary fs-7"></a>
 														</div>
 														<!--end::Username-->
 													</div>
@@ -531,9 +390,7 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="separator my-2"></div>
 												<!--end::Menu separator-->
 												<!--begin::Menu item-->
-												<div class="menu-item px-5 my-1">
-													<a href="../../demo1/dist/account/settings.html" class="menu-link px-5">Account Settings</a>
-												</div>
+												
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
 												<div class="menu-item px-5">
@@ -573,7 +430,7 @@ License: For each use you must have a valid license purchased only from above li
 						
 						<!--end::Content-->
 						<!--begin::Footer-->
-						<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
+						<div class="footer py-4 d-flex flex-lg-column" id="kt_footer" style="z-index: 100;">
 							<!--begin::Container-->
 							<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
 								<!--begin::Copyright-->
@@ -2290,18 +2147,27 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Engage toolbar-->
 		
 		<!--begin::Javascript-->
-		<script>var hostUrl = "assets/";</script>
+		
+		<script>var base_url = window.location.origin;</script>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="metronic_assets\plugins.bundle.js"></script>
-		<script src="metronic_assets\scripts.bundle.js"></script>
+		<script src="\metronic_assets\plugins.bundle.js"></script>
+		<script src="\metronic_assets\scripts.bundle.js"></script>
+		
 		<!--end::Global Javascript Bundle-->
+		{{-- <script src="public\metronic_assets\require.js"></script> --}}
 		<!--begin::Page Vendors Javascript(used by this page)-->
-		{{-- <script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script> --}}
+		{{-- <script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script> --}}
+		{{-- <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script> --}}
+		{{-- <script src="metronic_assets\jquery.dataTables.min.js" defer></script> --}}
+		<script src="\metronic_assets\datatable\datatables.bundle.js"></script>
 		<!--end::Page Vendors Javascript-->
+		<script src="https://kit.fontawesome.com/9dd10fc461.js" crossorigin="anonymous"></script>
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="metronic_assets/widgets.bundle.js"></script>
-		<script src="metronic_assets/widgets.js"></script>
+		<script src="\metronic_assets/widgets.bundle.js"></script>
+		<script src="\metronic_assets/widgets.js"></script>
+		@section('js_scripts')
+		@show
 		{{-- <script src="assets/js/custom/apps/chat/chat.js"></script>
 		<script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 		<script src="assets/js/custom/utilities/modals/create-app.js"></script>

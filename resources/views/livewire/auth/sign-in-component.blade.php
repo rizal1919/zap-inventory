@@ -28,8 +28,8 @@
 @endsection
 
 @section('js_scripts')
-	<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="metronic_assets/general.js"></script>
+	<script src="metronic_assets\particles.min.js"></script>
+    <script src="metronic_assets\general.js"></script>
 @endsection
 
 @section('content')
@@ -59,43 +59,47 @@
 								<h1 class="text-dark mb-3 fs-1">Portal</h1>
 								<!--end::Title-->
 								<!--begin::Link-->
-								<div class="text-gray-400 fw-bold fs-6">New Here?
-								<a href="{{ route('startSignup') }}" class="link-primary fw-bolder text-portal">Create an Account</a></div>
+								<div class="text-gray-400 fw-bold fs-6">Belum punya akun?
+								<a href="{{ route('startSignup') }}" class="link-primary fw-bolder text-portal">Daftar disini</a></div>
 								<!--end::Link-->
 							</div>
 							<!--begin::Heading-->
 							<!--begin::Input group-->
-							<div class="fv-row">
+							<div class="mb-5 fv-row">
 								<!--begin::Label-->
 								{{-- <label class="form-label fs-6 fw-bolder text-dark">Username</label> --}}
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input class="form-control form-control-lg form-control-solid" placeholder="username" type="text" value="" name="username" autocomplete="off" />
+								<input class="form-control form-control-lg form-control-solid" placeholder="username" type="text" value="" name="username" autocomplete="off" required/>
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
 							<div class="fv-row mb-10">
 								<!--begin::Wrapper-->
-								<div class="d-flex flex-stack mb-2">
-									<!--begin::Label-->
-									{{-- <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label> --}}
-									<!--end::Label-->
-									<!--begin::Link-->
-									{{-- <a href="../../demo1/dist/authentication/layouts/basic/password-reset.html" class="link-primary fs-6 fw-bolder">Forgot Password ?</a> --}}
-									<!--end::Link-->
-								</div>
 								<!--end::Wrapper-->
 								<!--begin::Input-->
-								<input class="form-control form-control-lg form-control-solid" placeholder="password" type="password" value="" name="password" autocomplete="off" />
+								<div class="position-relative mb-3">
+									<input class="form-control form-control-lg form-control-solid" id="password" placeholder="password" type="password" value="" name="password" autocomplete="off" required/>
+									<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2">
+										<svg xmlns="http://www.w3.org/2000/svg" id="open_eye" width="16" height="16" fill="currentColor" class="bi bi-eye-fill d-none" viewBox="0 0 16 16">
+											<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+											<path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+										</svg>
+										<svg xmlns="http://www.w3.org/2000/svg" id="close_eye" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+											<path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+											<path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+										</svg>
+									</span>
+								</div>
 								<!--end::Input-->
 							</div>
 							<!--end::Input group-->
 							<!--begin::Actions-->
 							<div class="text-center mb-20">
 								<!--begin::Submit button-->
-								<button type="submit" id="kt_sign_in_submit" class="btn btn-lg bg-portal w-100 mb-5">
-									<span class="indicator-label">Continue</span>
+								<button type="submit" id="kt_sign_in_submit" class="btn btn-lg bg-portal mb-5">
+									<span class="indicator-label">Masuk</span>
 									<span class="indicator-progress">Please wait...
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 								</button>

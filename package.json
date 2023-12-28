@@ -11,6 +11,10 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "particles.js": "^2.0.0"
+        "datatables.net-dt": "^1.13.6",
+        "font-awesome": "^4.7.0",
+        "jquery": "^3.7.1",
+        "particles.js": "^2.0.0",
+        "ziggy-js": "^1.7.2"
     }
 }
