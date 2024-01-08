@@ -11,4 +11,16 @@ class StatusCode extends Model
 
     protected $guarded = ['id'];
 
+    public function items(){
+        return $this->hasMany(Items::class, 'status', 'code_id');
+    }
+
+    // public function services(){
+    //     return $this->hasMany(User::class, 'id', 'item_id');
+    // }
+
+    // public function categories(){
+    //     return $this->belongsTo(ItemCategories::class, 'category_id', 'id');
+    // }
+
 }

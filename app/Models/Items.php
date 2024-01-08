@@ -24,6 +24,10 @@ class Items extends Model
         return $this->belongsTo(ItemCategories::class, 'category_id', 'id');
     }
 
+    public function statusCode(){
+        return $this->belongsTo(StatusCode::class, 'status', 'code_id');
+    }
+
     // public function logActivity(){
     //     return $this->hasMany(LogActivity::class, '')
     // }

@@ -42,7 +42,7 @@ class ItemsController extends Controller
     {   
         $idItem = base64_decode($id);
 
-        $item = Items::with('last_edit_user', 'categories')->find($idItem);
+        $item = Items::with('statusCode', 'last_edit_user', 'categories')->find($idItem);
         if(!empty($item))
         {
             $categories = ItemCategories::all();

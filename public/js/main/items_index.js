@@ -3,6 +3,7 @@
 // import route from 'ziggy';
 // var oTable;
 
+
 var CategoryTable = (function () {
     var filterData = {};
 
@@ -22,7 +23,7 @@ var CategoryTable = (function () {
                     data: "nama_barang",
                     className: "text-capitalize",
                     render: function (data, type, row) {
-                        return `<p class="text-primary" style="cursor: pointer;" onclick="showDetailBarang('${row.id}')">${data}</p>`;
+                        return `<p class="text-primary" onclick="showDetailBarang('${row.id}')" style="cursor: pointer;">${data}</p>`;
                     },
                 },
                 {
@@ -44,7 +45,6 @@ var CategoryTable = (function () {
                     data: null,
                     className: "text-center",
                     render: function (data, type, row) {
-                        console.log(row);
                         return `<a href="javascript:void(0)" onclick="showForEditBarang(${row.id})" class="btn btn-sm btn-success">
                                 Edit
                                 </a>`;
@@ -93,67 +93,7 @@ var CategoryTable = (function () {
         });
     };
 
-    // var handleSelectDatatable = function(){
-    //     const selectOptions = document.getElementById('category_in_dash');
-    //     selectOptions.addEventListener("change", function (e) {
-    //         filterData.category_id = e.target.value;
-    //     });
-    //     oTable.draw(false);
-    // }
-
-    // Filter Datatable
-    // var handleFilterDatatable = () => {
-    //     var start = moment().subtract(29, "days");
-    //     var end = moment();
-
-    //     function cb(start, end) {
-    //         $("#project_table_sales_filter").html(
-    //             start.format("MMMM D, YYYY") + "-" + end.format("MMMM D, YYYY")
-    //         );
-    //     }
-
-    //     $("#project_table_sales_filter").daterangepicker(
-    //         {
-    //             startDate: start,
-    //             endDate: end,
-    //             ranges: {
-    //                 Today: [moment(), moment()],
-    //                 Yesterday: [
-    //                     moment().subtract(1, "days"),
-    //                     moment().subtract(1, "days"),
-    //                 ],
-    //                 "Last 7 Days": [moment().subtract(6, "days"), moment()],
-    //                 "Last 30 Days": [moment().subtract(29, "days"), moment()],
-    //                 "This Month": [
-    //                     moment().startOf("month"),
-    //                     moment().endOf("month"),
-    //                 ],
-    //                 "Last Month": [
-    //                     moment().subtract(1, "month").startOf("month"),
-    //                     moment().subtract(1, "month").endOf("month"),
-    //                 ],
-    //             },
-    //         },
-    //         cb
-    //     );
-
-    //     cb(start, end);
-    //     // Select filter options
-    //     $("#project_table_sales_filter").on("change", function () {
-    //         const date = $("#project_table_sales_filter").val();
-    //         filterData.date = date;
-
-    //         oTable.draw(false);
-    //     });
-
-    //     $("#kt_project_sales_flatpickr_clear").on("click", function () {
-    //         $("#project_table_sales_filter").val("");
-    //         const date = $("#project_table_sales_filter").val();
-    //         filterData.date = date;
-
-    //         oTable.draw(false);
-    //     });
-    // };
+   
 
     // Public methods
     return {
@@ -168,7 +108,7 @@ var CategoryTable = (function () {
 
 CategoryTable.init();
 
-
+// $("#detailItem").modal('show');
 
 const addNewItem = () => {
     Swal.fire({
@@ -221,20 +161,24 @@ const showDetailBarang = (id) => {
         processData: false,
         contentType: false,
         success: function (response) {
-            $("#nama_barang").text(response.data.nama_barang);
-            $("#kategori").text(response.data.categories.category_name);
-            $("#penerima").text(response.data.penerima);
-            $("#merk").text(response.data.merk);
-            $("#tipe").text(response.data.tipe);
-            $("#nomor_seri").text(response.data.nomor_seri);
-            $("#toko").text(response.data.toko === null ? "-" : response.data.toko);
-            $("#harga").text(response.data.harga === null ? "-" : response.data.harga);
-            $("#keterangan").text(response.data.keterangan === null ? "-" : response.data.keterangan);
-            $("#kapasitas").text(response.data.kapasitas === null ? "-" : response.data.kapasitas);
-            $("#status").text(response.data.status === null ? "-" : response.data.status);
-            const d = new Date(response.data.updated_at);
-            $("#updated_at").text(moment(d.getTime()).format('DD MMMM YYYY'));
-            $("#last_edited_by_id").text(response.data.last_edit_user[0].username);
+            console.log(response);
+            $("#stats").text(response.data.status_code.status);
+            $("#item_name").html(`${response.data.nama_barang} <br> <p class="text-muted mt-1" style="font-size: 10px;">${moment(response.data.created_at).format('DD MMMM YYYY - h:mm a')}</p>`);
+            $("#receiver").text(response.data.penerima);
+            $("#detail_merk").text(response.data.merk);
+            $("#detail_tipe").text(response.data.tipe);
+            $("#detail_nomor_seri").text(response.data.nomor_seri);
+            $("#detail_watt").text(response.data.watt == null ? "-" : response.data.watt);
+            $("#detail_kapasitas").text(response.data.kapasitas == null ? "-" : response.data.kapasitas);
+            $("#detail_detail_toko").text(response.data.toko == null ? "-" : response.data.toko);
+            $("#detail_keterangan").text(response.data.keterangan == null ? "-" : response.data.keterangan);
+            $("#last_updated").html(`${moment(response.data.updated_at).format('DD MMMM YYYY')}, ${response.data.last_edit_user[0].fullname}`);
+            $("#detailItem").modal('show');
+            $(".modal-dialog").draggable({
+                cursor: "move",
+                handle: ".dragable_touch",
+            });
+            
             toastr.success('Lihat Detail', 'Berhasil')
         },
         error: function (error) {
@@ -291,6 +235,12 @@ const showForEditBarang = (id) => {
         },
     });
 }
+
+
+
+// var arr = [...htmlCollection];
+
+
 
 const editItem = () => {
     var id = $('#items_id').val();

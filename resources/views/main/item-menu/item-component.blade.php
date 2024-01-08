@@ -3,6 +3,9 @@
 
 @section('js_scripts')
     <script src="js\main\items_index.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> --}}
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 @endsection
 
 @section('css_scripts')
@@ -74,7 +77,7 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">    
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <div class="kt_content_container">
                     <div class="row justify-content-between">
                         <div class="col-lg-4">
@@ -145,14 +148,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="mt-10 mb-10" style="margin-left: 0px;">
+            <div class="mb-10" style="margin-left: 0px;">
                 <!--begin::Container-->
                 <div class="kt_content_container" id="kt_content_container">
                     <!--begin::Card-->
-                    <div class="card p-10" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;" wire:ignore>
-                        <h5 style="margin-left: 35px;">Barang</h5>
+                    <div class="card p-10" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;" wire:ignore>
+                        {{-- <h5 style="margin-left: 35px;">Barang</h5> --}}
                         <!--begin::Card header-->
                         <div class="card-header border-0 pt-6">
                             <!--begin::Card title-->
@@ -184,7 +187,7 @@
                                                 <option value="10">Process</option>
                                             </select>
                                     </div> --}}
-                                    <a href="javascript:return false;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewItems">Tambah Baru</a>
+                                    <a href="javascript:return false;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewItems" id="add_new_item" >Tambah Baru</a>
                                     {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                         Launch static backdrop modal
                                       </button> --}}
@@ -240,15 +243,82 @@
         <!--end::Container-->
     </div>
 
+    <!-- Detail Modal -->
+    <div class="modal fade" id="detailItem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg w-500px">
+        <div class="modal-content">
+            <div class="modal-header  card-header ribbon ribbon-top dragable_touch">
+                <div class="ribbon-label bg-success" style="max-width: 200px; position: absolute; left: 65px; top: 3px;" id="stats">Succeeded</div>
+                <h1 class="modal-title  fs-1 fw-boldest mt-15" style="margin-left: 30px;" id="item_name">
+                    Mouse 150R <br> <p class="text-muted mt-1" style="font-size: 10px;">Jul 3, 2020 09:21 pm</p>
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-10 dragable_touch " style="background-color: #ECECEC;">
+                <div class="" style="width: 90%; margin: 0px auto;">
+                    <p class="text-muted fw-boldest mb-0" style="margin-bottom: 0xp; font-size: 10px; letter-spacing: 0.3px;" >Penerima</p>
+                    <p class="fw-bolder fw-boldest" style="margin-top: 0px;" id="receiver">Decky Sundawa</p>
+                    <hr class="fw-bold" style="height: 2px;">
+                    <p class="fw-bolder fs-6 fw-boldest" style="margin-top: 0px;">Informasi Utama</p>
+                    <div class="row mb-3">
+                        <div class="col-lg-3">
+                            <p class="text-muted fw-boldest mb-0" style="margin-bottom: 0xp; font-size: 10px; letter-spacing: 0.3px;">Merk</p>
+                            <p class="fw-bolder fw-boldest" style="margin-top: 0px;" id="detail_merk">Logitech</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <p class="text-muted fw-boldest mb-0" style="margin-bottom: 0xp; font-size: 10px; letter-spacing: 0.3px;">Tipe</p>
+                            <p class="fw-bolder fw-boldest" style="margin-top: 0px;" id="detail_tipe">M100 R</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <p class="text-muted fw-boldest mb-0" style="margin-bottom: 0xp; font-size: 10px; letter-spacing: 0.3px;">No Seri</p>
+                            <p class="fw-bolder fw-boldest" style="margin-top: 0px;" id="detail_nomor_seri">DSA322393</p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-3">
+                            <p class="text-muted fw-boldest mb-0" style="margin-bottom: 0xp; font-size: 10px; letter-spacing: 0.3px;">Watt</p>
+                            <p class="fw-bolder fw-boldest" style="margin-top: 0px;" id="detail_watt">20 Volt</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <p class="text-muted fw-boldest mb-0" style="margin-bottom: 0xp; font-size: 10px; letter-spacing: 0.3px;">Kapasitas</p>
+                            <p class="fw-bolder fw-boldest" style="margin-top: 0px;" id="detail_kapasitas">20 Gb</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <p class="text-muted fw-boldest mb-0" style="margin-bottom: 0xp; font-size: 10px; letter-spacing: 0.3px;">Toko</p>
+                            <p class="fw-bolder fw-boldest" style="margin-top: 0px;" id="detail_toko">Shopee</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p class="text-muted fw-boldest mb-0" style="margin-bottom: 0xp; font-size: 10px; letter-spacing: 0.3px;">Keterangan</p>
+                            <p class="fw-bolder fw-boldest mt-1" style="margin-top: 0px;" id="detail_keterangan">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                    <hr class="fw-bold" style="height: 2px;">
+                    <div class="row mt-7">
+                        <div class="col-lg-9">
+                            <p class="fw-bolder fs-6 fw-boldest" style="margin-top: 0px;">Terakhir Update</p>
+                            <p class="text-muted fw-boldest mb-0" style="margin-bottom: 0xp; font-size: 10px; letter-spacing: 0.3px;">Tanggal, Pengguna</p>
+                            <p class="fw-bolder fw-boldest mt-1" style="margin-top: 0px;" id="last_updated">23 Juni 2023, Decky Sundawa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer dragable_touch" style="background-color: #ECECEC;">
+            </div>
+        </div>
+        </div>
+    </div>
+
     <!-- Add Modal -->
     <div class="modal fade" id="addNewItems" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Barang Baru</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Barang Baru</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body row">
+            <div class="modal-body row" >
                 <form id="add_item">
                     @csrf
                     <!--begin::Accordion-->
@@ -367,7 +437,7 @@
                     <!--end::Accordion-->
                 </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="background-color: #f6f6f6;">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
             <button type="button" class="btn btn-primary" onclick="addNewItem()">Simpan</button>
             </div>
